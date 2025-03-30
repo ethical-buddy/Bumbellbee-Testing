@@ -2,7 +2,7 @@
 
 void kmain(void)
 {
-    const char *str = "My first kernel with keyboard, paging, page fault handling and basic heap support";
+    const char *str = "Bumbellbee with Kernel Features: Basic Paging, IDT/PIC Remapping, Keyboard Input, Bump & Dynamic Heap, Exception Handling, Dynamic Memory Management, and Process Management with Scheduling";
     clear_screen();
     kprint(str);
     kprint_newline();
