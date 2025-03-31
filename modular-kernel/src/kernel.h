@@ -58,6 +58,7 @@ void page_fault_handler_main(unsigned int error_code);
 void init_paging(void);
 void kprint_hex(unsigned int n);
 void *kmalloc(unsigned int size);
+
 void kmain(void);
 
 #endif
