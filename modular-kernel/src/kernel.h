@@ -21,7 +21,7 @@
 
 /* --- Kernel Heap --- */
 #define KERNEL_HEAP_SIZE (1024 * 1024)  /* 1MB kernel heap */
-
+#include <stdint.h>
 #include "keyboard_map.h"
 
 /* --- External assembly functions --- */
@@ -57,9 +57,10 @@ void clear_screen(void);
 void keyboard_handler_main(void);
 void page_fault_handler_main(unsigned int error_code);
 void init_paging(void);
+uint32_t* create_page_directory();
 void kprint_hex(unsigned int n);
 void *kmalloc(unsigned int size);
-
+void *kmalloc_aligned(uint32_t size);
 void kmain(void);
 
 #endif

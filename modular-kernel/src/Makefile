@@ -17,6 +17,7 @@ objs = 	$(prefix)kernel_asm.o \
 	$(prefix)keyboard_map.o \
 	$(prefix)memory.o \
 	$(prefix)mm.o \
+	$(prefix)proc.asm.o \
 	$(prefix)proc.o \
 
 cflags =  -m32 -ffreestanding -g
@@ -39,6 +40,7 @@ all:
 	$(toolchain)gcc $(cflags) -c keyboard_map.c -o $(prefix)keyboard_map.o
 	$(toolchain)gcc $(cflags) -c memory.c -o $(prefix)memory.o
 	$(toolchain)gcc $(cflags) -c mm.c -o $(prefix)mm.o
+	$(toolchain)as  proc.S  -o $(prefix)proc.asm.o
 	$(toolchain)gcc $(cflags) -c proc.c -o $(prefix)proc.o
 
 	$(toolchain)ld -m elf_i386 -T $(prefix)linker.ld -o kernel.bin $(objs)
