@@ -13,6 +13,11 @@ void kprint(const char *str)
     }
 }
 
+void putch(unsigned char c){
+	vidptr[current_loc++] = c;
+	vidptr[current_loc++] = 0x07;
+}
+
 void kprint_newline(void)
 {
     unsigned int line_size = BYTES_FOR_EACH_ELEMENT * COLUMNS_IN_LINE;

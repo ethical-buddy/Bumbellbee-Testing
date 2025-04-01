@@ -25,7 +25,7 @@
 #include "keyboard_map.h"
 
 /* --- External assembly functions --- */
-extern void keyboard_handler(void);
+//extern void keyboard_handler(void);
 extern void page_fault_handler(void);
 extern char read_port(unsigned short port);
 extern void write_port(unsigned short port, unsigned char data);
@@ -52,6 +52,7 @@ void idt_init(void);
 void kb_init(void);
 void kprint(const char *str);
 void kprint_newline(void);
+void putch(unsigned char c);
 void clear_screen(void);
 void keyboard_handler_main(void);
 void page_fault_handler_main(unsigned int error_code);

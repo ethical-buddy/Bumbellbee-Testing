@@ -1,18 +1,17 @@
 #include "kernel.h"
 #include "proc.h"
-
+#include "irq.h"
+#include "isr.h"
+#include "timer.h"
+#include "kb.h"
 void pid0_print(){
     kprint("1");
 }
 
-void pid1_print(){
-    // asm ("movl $20, %edx");  // Moves 20 into the EAX register
-    kprint("2");
-}
 
 void kmain(void)
 {
-    const char *str = "Bumbellbee with Kernel Features: Basic Paging, IDT/PIC Remapping, Keyboard Input, Bump & Dynamic Heap, Exception Handling, Dynamic Memory Management, and Process Management with Scheduling";
+    const char *str = "Bumbellbee with Kernel Features: Basic Paging, IDT/PIC Remapping, Keyboard Input, Bump & Dynamic Heap, Exception Handling, Dynamic Memory Management, and Process Management with Scheduling, ISR, IRQ ,PIC, PIT-timer";    
     clear_screen();
     kprint(str);
     kprint_newline();
@@ -23,10 +22,19 @@ void kmain(void)
 
     /* Initialize the IDT (including the page fault and keyboard handlers) */
     idt_init();
+	
+    /* install ISR's */
+    isr_install();
 
+    /* Install IRQ's */
+    irq_install();
+
+    /* Enable PIC */
+    timer_install();
+
+    keyboard_install();
     /* Enable keyboard interrupts */
-    kb_init();
-
+    asm volatile ("sti");
     mm_init();
 
     /* Demonstrate kmalloc usage */
@@ -39,12 +47,8 @@ void kmain(void)
     /* Processes */
 
     proc_init();
-    process_t* pid0 = proc_create(pid0_print);
-    process_t* pid1 = proc_create(pid1_print);
-    proc_schedule();
+    process_t* p0 = proc_create(pid0_print);
     proc_yield();
-
-
 
     while(1);  /* Halt the kernel loop */
 }

@@ -9,7 +9,7 @@ section .text
 
 ; Export global labels
 global start
-global keyboard_handler
+;global keyboard_handler
 global page_fault_handler
 global read_port
 global write_port
@@ -17,7 +17,7 @@ global load_idt
 
 ; Import external C functions
 extern kmain                     ; main kernel C function
-extern keyboard_handler_main     ; C routine for keyboard interrupt
+;extern keyboard_handler_main     ; C routine for keyboard interrupt
 extern page_fault_handler_main   ; C routine for page fault exception
 
 ; -----------------------------
@@ -45,9 +45,9 @@ load_idt:
 
 ; -----------------------------
 ; Keyboard Interrupt Handler Stub
-keyboard_handler:
-    call keyboard_handler_main
-    iretd
+;keyboard_handler:
+;    call keyboard_handler_main
+;    iretd
 
 ; -----------------------------
 ; Page Fault Exception Handler Stub
